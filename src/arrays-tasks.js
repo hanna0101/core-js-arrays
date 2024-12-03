@@ -438,8 +438,10 @@ function getFalsyValuesCount(arr) {
  *                              [0,0,0,1,0],
  *                              [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  return Array.from({ length: n }, (row, i) =>
+    Array.from({ length: n }, (column, j) => (i === j ? 1 : 0))
+  );
 }
 
 /**
@@ -619,8 +621,21 @@ function sortDigitNamesByNumericOrder(arr) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const arrLength = arr.length;
+  const half = Math.floor(arrLength / 2);
+  const isArrayBalanced = arrLength % 2 === 0;
+  let middleElement = [];
+  if (!isArrayBalanced) {
+    middleElement = arr[half];
+  }
+
+  const firstHalf = arr.slice(0, half);
+  const secondHalf = arr.slice(!isArrayBalanced ? half + 1 : half);
+
+  return isArrayBalanced
+    ? [...secondHalf, ...firstHalf]
+    : [...secondHalf, middleElement, ...firstHalf];
 }
 
 module.exports = {
